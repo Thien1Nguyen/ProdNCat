@@ -1,0 +1,43 @@
+@model Category
+
+@await Html.PartialAsync("_Navbar")
+<div class="container text-center">
+    <h1>@Model.Name</h1>
+    <div class="row">
+        <div class="col">
+            <h2>Products</h2>
+            @foreach (ProdCatAssociation association in Model.AssociationsList)
+            {
+                <p>@association.Product.Name</p>
+            }
+        </div>
+        <div class="col">
+            <h2>Add Product</h2>
+            <form
+                asp-controller="Home" 
+                asp-action="CreateAssociation" 
+                method="POST" 
+            >
+                <input hidden type="text" name="CategoryId" value="@Model.CategoryId">
+                <select name="ProductId" class="form-select">
+                    @{
+                        List<int> filtedList = new List<int>();
+                        foreach(ProdCatAssociation associtaion in Model.AssociationsList)
+                        {
+                            filtedList.Add(associtaion.ProductId);
+                        }
+
+                        foreach (Product prod in ViewBag.allProducts)
+                        {
+                            if(!filtedList.Contains(prod.ProductId))
+                            {
+                                <option value="@prod.ProductId">@prod.Name</option>
+                            }
+                        }
+                    }  
+                </select>
+                <button>Add</button>
+            </form>
+        </div>
+    </div>
+</div>

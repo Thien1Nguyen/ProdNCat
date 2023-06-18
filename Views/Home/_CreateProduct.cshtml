@@ -1,0 +1,28 @@
+@model Product
+
+<div class="w-50">
+    <h1 class="display-4">New Product</h1>
+    <form 
+        asp-controller="Home" 
+        asp-action="CreateProduct" 
+        method="POST"
+    >
+        <div class="mb-3">
+            <label asp-for="Name">Name </label>
+            <span class="text-danger" asp-validation-for="Name"></span>
+            <input type="text" asp-for="Name" class="form-control w-50">
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description">Description </label>
+            <span class="text-danger" asp-validation-for="Description"></span>
+            <input type="text" asp-for="Description" class="form-control w-50">
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price">Price </label>
+            <span class="text-danger" asp-validation-for="Price"></span>
+            <input type="number" asp-for="Price" class="form-control w-50">
+        </div>
+        <button class="btn btn-primary">Create</button>
+    </form>
+</div>
